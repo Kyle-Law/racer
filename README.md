@@ -1,4 +1,4 @@
-# Welcome to the One and only UdaciRacer Simulation Game
+# Racer
 
 ## Project Introduction
 
@@ -13,14 +13,6 @@ The game has three main views:
 2. The race progress view (this includes the live-updating leaderboard and acceleration button)
 
 3. The race results view
-
-## Starter Code
-
-We have supplied you with the following:
-
-1. An API. The API is provided in the form of a binary held in the bin folder. You never need to open the binary file, as there are no edits you can make to it. Your work will be 100% in the front end.
-
-2. HTML Views. The focus of this course is not UI development or styling practice, so we have already provided you with pieces of UI, all you have to do is call them at the right times.
 
 ## Getting Started
 
@@ -51,10 +43,6 @@ Note that this process will use your terminal tab, so you will have to open a ne
 ### Start the Frontend
 
 First, run your preference of `npm install && npm start` or `yarn && yarn start` at the root of this project. Then you should be able to access http://localhost:3000.
-
-## Project Requirements
-
-This starter code base has directions for you in `src/client/assets/javascript/index.js`. There you will be directed to use certain asynchronous methods to achieve tasks. You will know you're making progress as you can play through more and more of the game.
 
 ### API Calls
 
