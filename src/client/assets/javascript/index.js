@@ -143,18 +143,19 @@ async function runCountdown() {
 
     return new Promise((resolve) => {
       // TODO - use Javascript's built in setInterval method to count down once per second
-      setInterval(() => console.log(timer), 1000);
-
-      // run this DOM manipulation to decrement the countdown for the user
-      document.getElementById("big-numbers").innerHTML = --timer;
-
-      // TODO - if the countdown is done, clear the interval, resolve the promise, and return
-      clearInterval();
-      Promise.resolve();
-      return;
+      setInterval(() => {
+        if (timer > 0) {
+          // DOM manipulation to decrement the countdown for the user
+          document.getElementById("big-numbers").innerHTML = --timer;
+        } else {
+          // if the countdown is done, clear the interval, resolve the promise, and return
+          clearInterval();
+          resolve();
+        }
+      }, 1000);
     });
   } catch (error) {
-    console.log(error);
+    console.log("error on runCountdown()::" + error);
   }
 }
 
@@ -193,7 +194,11 @@ function handleSelectTrack(target) {
 function handleAccelerate() {
   console.log("accelerate button clicked");
   // TODO - Invoke the API call to accelerate
-  accelerate(store.race_id);
+  try {
+    accelerate(store.race_id);
+  } catch (error) {
+    console.log("Problem with handleAccelerate() ::", error);
+  }
 }
 
 // HTML VIEWS ------------------------------------------------
