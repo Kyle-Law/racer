@@ -77,7 +77,7 @@ async function delay(ms) {
 async function handleCreateRace() {
   // render starting UI
   renderAt("#race", renderRaceStartView(getRace(store.race_id)));
-
+  console.log(store);
   // TODO - Get player_id and track_id from the store
   // store.player_id
   // store.track_id
@@ -87,7 +87,7 @@ async function handleCreateRace() {
 
   // TODO - update the store with the race id
   race.then((data) => {
-    store.race_id = data.id;
+    store.race_id = data.ID;
   });
 
   // The race has been created, now start the countdown
@@ -96,7 +96,7 @@ async function handleCreateRace() {
 
   // TODO - call the async function startRace
 
-  startRace();
+  startRace(store.race_id);
   // TODO - call the async function runRace
   runRace(store.race_id);
 }
