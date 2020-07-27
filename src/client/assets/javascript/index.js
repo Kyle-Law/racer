@@ -355,14 +355,14 @@ function getTracks() {
   // GET request to `${SERVER}/api/tracks`
   return fetch(`${SERVER}/api/tracks`)
     .then((res) => res.json())
-    .catch((err) => console.log("Problem with createRace request::", err));
+    .catch((err) => console.log("Problem with getRacks request::", err));
 }
 
 function getRacers() {
   // GET request to `${SERVER}/api/cars`
   return fetch(`${SERVER}/api/cars`)
     .then((res) => res.json())
-    .catch((err) => console.log("Problem with createRace request::", err));
+    .catch((err) => console.log("Problem with getRacers request::", err));
 }
 
 function createRace(player_id, track_id) {
@@ -384,7 +384,7 @@ function getRace(id) {
   // GET request to `${SERVER}/api/races/${id}`
   return fetch(`${SERVER}/api/races/${id}`)
     .then((res) => res.json())
-    .catch((err) => console.log("Problem with createRace request::", err));
+    .catch((err) => console.log("Problem with getRace request::", err));
 }
 
 function startRace(id) {
@@ -393,7 +393,7 @@ function startRace(id) {
     ...defaultFetchOpts(),
   })
     .then((res) => res.json())
-    .catch((err) => console.log("Problem with getRace request::", err));
+    .catch((err) => console.log("Problem with startRace request::", err));
 }
 
 function accelerate(id) {
@@ -405,5 +405,5 @@ function accelerate(id) {
     ...defaultFetchOpts(),
   })
     .then((res) => res.json())
-    .catch((err) => console.log("Problem with getRace request::", err));
+    .catch((err) => console.log("Problem with accelerate request::", err));
 }
