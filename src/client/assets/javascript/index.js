@@ -74,6 +74,7 @@ async function delay(ms) {
 // ^ PROVIDED CODE ^ DO NOT REMOVE
 
 // This async function controls the flow of the race, add the logic and error handling
+/*
 async function handleCreateRace() {
   // render starting UI
   renderAt("#race", renderRaceStartView(getRace(store.race_id)));
@@ -87,7 +88,7 @@ async function handleCreateRace() {
 
   // TODO - update the store with the race id
   race.then((data) => {
-    store.race_id = data.ID;
+    store.race_id = data.ID - 1;
   });
 
   // The race has been created, now start the countdown
@@ -99,6 +100,41 @@ async function handleCreateRace() {
   startRace(store.race_id);
   // TODO - call the async function runRace
   runRace(store.race_id);
+}*/
+
+// async function handleCreateRace() {
+//   try {
+//     renderAt("#race", renderRaceStartView(getRace(store.race_id)));
+//     const race = createRace(store.player_id, store.track_id);
+//     race.then((data) => {
+//       store.race_id = data.ID - 1;
+//     });
+//     runCountdown();
+//     startRace(store.race_id);
+//     runRace(store.race_id);
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
+
+async function handleCreateRace() {
+  const { track_id, player_id } = store;
+  if (!track_id || !player_id) {
+    alert(`Please select track and racer to start the race!`);
+    return;
+  }
+  try {
+    const race = await createRace(player_id, track_id);
+    store.race_id = race.ID - 1;
+    // render starting UI
+    renderAt("#race", renderRaceStartView(race.Track, race.Cars));
+    await runCountdown();
+    console.log(store.race_id);
+    await startRace(store.race_id);
+    await runRace(store.race_id);
+  } catch (e) {
+    console.log(e);
+  }
 }
 
 function runRace(raceID) {
@@ -172,7 +208,7 @@ function handleSelectPodRacer(target) {
   target.classList.add("selected");
 
   // TODO - save the selected racer to the store
-  store.race_id = target.id;
+  store.player_id = target.id;
 }
 
 function handleSelectTrack(target) {
@@ -353,14 +389,14 @@ function defaultFetchOpts() {
 
 function getTracks() {
   // GET request to `${SERVER}/api/tracks`
-  return fetch(`${SERVER}/api/tracks`)
+  return fetch(`${SERVER}/api/tracks`, { ...defaultFetchOpts() })
     .then((res) => res.json())
     .catch((err) => console.log("Problem with getRacks request::", err));
 }
 
 function getRacers() {
   // GET request to `${SERVER}/api/cars`
-  return fetch(`${SERVER}/api/cars`)
+  return fetch(`${SERVER}/api/cars`, { ...defaultFetchOpts() })
     .then((res) => res.json())
     .catch((err) => console.log("Problem with getRacers request::", err));
 }
@@ -382,7 +418,7 @@ function createRace(player_id, track_id) {
 
 function getRace(id) {
   // GET request to `${SERVER}/api/races/${id}`
-  return fetch(`${SERVER}/api/races/${id}`)
+  return fetch(`${SERVER}/api/races/${id}`, { ...defaultFetchOpts() })
     .then((res) => res.json())
     .catch((err) => console.log("Problem with getRace request::", err));
 }
