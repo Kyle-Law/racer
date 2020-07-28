@@ -160,8 +160,8 @@ function runRace(raceID) {
 						resolve(res) // resolve the promise
 					*/
             clearInterval(raceInterval); // to stop the interval from repeating
-            renderAt("#race", resultsView(res.positions)); // to render the results view
-            resolve(res); // resolve the promise
+            renderAt("#race", resultsView(data.positions)); // to render the results view
+            resolve(data); // resolve the promise
           }
         })
         .catch((err) => console.log("Problem with get racing status::", err)),
