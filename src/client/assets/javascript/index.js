@@ -145,12 +145,10 @@ function runRace(raceID) {
         .then((data) => {
           /* 
 						TODO - if the race info status property is "in-progress", update the leaderboard by calling:
-						
-
 						renderAt('#leaderBoard', raceProgress(res.positions))
 					*/
           if (data.status === "in-progress") {
-            renderAt("#leaderBoard", raceProgress(res.positions));
+            renderAt("#leaderBoard", raceProgress(data.positions));
           } else if (data.status === "finished") {
             /* 
 						TODO - if the race info status property is "finished", run the following:
@@ -208,7 +206,7 @@ function handleSelectPodRacer(target) {
   target.classList.add("selected");
 
   // TODO - save the selected racer to the store
-  store.player_id = target.id;
+  store.player_id = parseInt(target.id);
 }
 
 function handleSelectTrack(target) {
@@ -424,22 +422,26 @@ function getRace(id) {
 }
 
 function startRace(id) {
-  return fetch(`${SERVER}/api/races/${id}/start`, {
-    method: "POST",
-    ...defaultFetchOpts(),
-  })
-    .then((res) => res.json())
-    .catch((err) => console.log("Problem with startRace request::", err));
+  return (
+    fetch(`${SERVER}/api/races/${id}/start`, {
+      method: "POST",
+      ...defaultFetchOpts(),
+    })
+      // .then((res) => res.json())
+      .catch((err) => console.log("Problem with startRace request::", err))
+  );
 }
 
 function accelerate(id) {
   // POST request to `${SERVER}/api/races/${id}/accelerate`
   // options parameter provided as defaultFetchOpts
   // no body or datatype needed for this request
-  return fetch(`${SERVER}/api/races/${id}/accelerate`, {
-    method: "POST",
-    ...defaultFetchOpts(),
-  })
-    .then((res) => res.json())
-    .catch((err) => console.log("Problem with accelerate request::", err));
+  return (
+    fetch(`${SERVER}/api/races/${id}/accelerate`, {
+      method: "POST",
+      ...defaultFetchOpts(),
+    })
+      // .then((res) => res.json())
+      .catch((err) => console.log("Problem with accelerate request::", err))
+  );
 }
