@@ -19,9 +19,20 @@ section#accelerate button {
   width: 300px;
   margin: 30px auto;
   border-radius: 180%;
-  background-color: green;
-  border-color: rgb(14, 166, 6);
+  background-color: rgb(128, 0, 0);
+  border-color: rgb(166, 6, 6);
   cursor: pointer;
+  font-size: 2rem;
+  color: white;
+  box-shadow: 0 5px 5px 5px rgba(0, 0, 0, 0.5);
+}
+
+section#accelerate button:active {
+  transform: translateY(2px);
+}
+
+section#accelerate button:focus {
+  outline: none;
 }
 
 #big-numbers {
